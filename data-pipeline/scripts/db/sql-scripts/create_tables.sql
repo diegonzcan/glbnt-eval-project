@@ -16,7 +16,7 @@ CREATE TABLE departments (
 CREATE TABLE hired_employees(
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR (30) NOT NULL,
-    datetime DATETIME NOT NULL,
+    datetime VARCHAR(20) NOT NULL,
     department_id INT NOT NULL,
     job_id INT NOT NULL,
     PRIMARY KEY (id),
