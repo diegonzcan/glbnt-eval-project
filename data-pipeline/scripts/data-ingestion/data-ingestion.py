@@ -4,9 +4,15 @@ from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import sessionmaker
 import logging
 import configparser
+import os
 
 config = configparser.ConfigParser()
 config.read(r'../../config.ini')
+
+# LOG RESET
+if os.path.exists('std.log'):
+    os.remove('std.log')
+else: pass
 
 logging.basicConfig(filename='std.log',
                     filemode='a',
