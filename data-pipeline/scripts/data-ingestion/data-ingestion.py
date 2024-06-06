@@ -64,6 +64,13 @@ def insert_csv(file,destination_table):
     try:
         with engine.begin() as connection:
             data = pd.read_csv(full_path)
+            # Check for missing values
+            missing_values = data[data.isnull().any(axis=1)]
+            if not missing_values.empty:
+                logging.info(f"Found {len(missing_values)} records with missing values in {file}.")
+                logging.info("Records with missing values:")
+                logging.info(missing_values)
+            data = data.dropna() # After logging the rows with missing values we drop them from the dataframe
             data.to_sql(destination_table, con=connection,if_exists='append', index=False)
             row_size = data.shape[0]
             logging.info(f'Succesfully loaded {row_size} rows from {file} to {destination_table}')
